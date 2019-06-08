@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCombustivel", "GCombustivel\GCombustivel.csproj", "{9A25E41E-5D67-4FF7-861A-CFDDE7026315}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console", "GCombustivel\Console.csproj", "{9A25E41E-5D67-4FF7-861A-CFDDE7026315}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCombustivel.Domain", "GCombustivel.Domain\GCombustivel.Domain.csproj", "{B1F7051B-00CD-4403-ADC5-3D9BB4E06B03}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "GCombustivel.Domain\Dominio.csproj", "{B1F7051B-00CD-4403-ADC5-3D9BB4E06B03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teste", "GCombustivel.Teste\Teste.csproj", "{AF09934E-939A-42DE-BBC7-A93F6D4A217C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B1F7051B-00CD-4403-ADC5-3D9BB4E06B03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1F7051B-00CD-4403-ADC5-3D9BB4E06B03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1F7051B-00CD-4403-ADC5-3D9BB4E06B03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF09934E-939A-42DE-BBC7-A93F6D4A217C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF09934E-939A-42DE-BBC7-A93F6D4A217C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF09934E-939A-42DE-BBC7-A93F6D4A217C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF09934E-939A-42DE-BBC7-A93F6D4A217C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
