@@ -25,7 +25,8 @@ namespace Damasio34.GCombustivel.Teste
         {
             var veiculo = new Veiculo(1, 7);
             var trecho = new Trecho("A", 35);
-            var rota = new Rota(1, veiculo, trecho);
+            veiculo.AdiconarTrecho(trecho);
+            var rota = new Rota(1, veiculo);
 
             Assert.AreEqual(rota.ConsumoMedio, 5, 0.1);
         }
@@ -35,7 +36,8 @@ namespace Damasio34.GCombustivel.Teste
         {
             var veiculo = new Veiculo(1, 7);
             var trecho = new Trecho("B", 80);
-            var rota = new Rota(1, veiculo, trecho);
+            veiculo.AdiconarTrecho(trecho);
+            var rota = new Rota(1, veiculo);
 
             Assert.AreEqual(rota.ConsumoMedio, 11.42857, 0.1);
         }
@@ -45,7 +47,8 @@ namespace Damasio34.GCombustivel.Teste
         {
             var veiculo = new Veiculo(1, 7);
             var trecho = new Trecho("C", 22);
-            var rota = new Rota(1, veiculo, trecho);
+            veiculo.AdiconarTrecho(trecho);
+            var rota = new Rota(1, veiculo);
 
             Assert.AreEqual(rota.ConsumoMedio, 3.142857, 0.1);
         }
@@ -61,7 +64,10 @@ namespace Damasio34.GCombustivel.Teste
             var trechoA = new Trecho("A", 35);
             var trechoB = new Trecho("B", 80);
             var trechoC = new Trecho("C", 22);
-            var rota = new Rota(1, veiculo, trechoA, trechoB, trechoC);            
+            veiculo.AdiconarTrecho(trechoA);
+            veiculo.AdiconarTrecho(trechoB);
+            veiculo.AdiconarTrecho(trechoC);
+            var rota = new Rota(1, veiculo);            
 
             Assert.AreEqual(rota.ConsumoMedio, 19.57142857, 0.1);
         }

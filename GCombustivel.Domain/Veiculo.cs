@@ -15,6 +15,9 @@ namespace Damasio34.GCombustivel.Dominio
         public int Codigo { get; }
         public int QuilometroPorLitro { get; }
         public IList<Rota> Rotas { get; private set; } = new List<Rota>();
+        public IList<Trecho> Trechos { get; private set; } = new List<Trecho>();
+
+        public void AdiconarTrecho(Trecho trecho) => this.Trechos.Add(trecho);
 
         public void AdiconarRota(Rota rota)
         {
