@@ -49,5 +49,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aplicacao\Aplicacao.csproj">
+      <Project>{243df8cd-ca23-454f-9e35-77ccb26d25e2}</Project>
+      <Name>Aplicacao</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GCombustivel.Domain\Dominio.csproj">
+      <Project>{b1f7051b-00cd-4403-adc5-3d9bb4e06b03}</Project>
+      <Name>Dominio</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

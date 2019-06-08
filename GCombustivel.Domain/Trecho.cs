@@ -5,12 +5,15 @@ namespace Damasio34.GCombustivel.Dominio
 {
     public class Trecho
     {
-        public Trecho(decimal quilometragem)
+        public Trecho(string codigo, double quilometragem)
         {
             if (quilometragem <= 0) throw new QuilometragemZeradaException();
             this.Quilometragem = quilometragem;
+
+            this.Codigo = codigo;
         }
 
-        public decimal Quilometragem { get; private set; }
+        public double Quilometragem { get; private set; }
+        public string Codigo { get; }
     }
 }

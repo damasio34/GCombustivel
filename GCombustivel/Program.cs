@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Aplicacao;
+using System;
 
 namespace GCombustivel
 {
@@ -10,6 +7,10 @@ namespace GCombustivel
     {
         static void Main(string[] args)
         {
+            var class1 = new Class1();
+            class1.LerArquivo();
+
+            Console.ReadKey();
         }
     }
 }
