@@ -14,15 +14,13 @@ namespace Damasio34.GCombustivel.Dominio
 
         public int Codigo { get; }
         public int QuilometroPorLitro { get; }
-        public IList<Rota> Rotas { get; private set; } = new List<Rota>();
-        public IList<Trecho> Trechos { get; private set; } = new List<Trecho>();
+        public IEnumerable<Rota> Rotas => Trechos.Select(p => p.Rota);
+        public List<Trecho> Trechos { get; private set; } = new List<Trecho>();
 
-        public void AdiconarTrecho(Trecho trecho) => this.Trechos.Add(trecho);
-
-        public void AdiconarRota(Rota rota)
-        {
-            if (this.Rotas.Any(p => p.Dia.Equals(rota.Dia))) throw new VeiculoEmRotaException();
-            this.Rotas.Add(rota);
-        }
+        //public void AdiconarRota(Rota rota)
+        //{
+        //    if (this.Rotas.Any(p => p.Dia.Equals(rota.Dia))) throw new VeiculoEmRotaException();
+        //    this.Rotas.Add(rota);
+        //}
     }
 }

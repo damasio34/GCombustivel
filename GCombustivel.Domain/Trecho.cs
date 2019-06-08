@@ -1,30 +1,21 @@
 ﻿using Damasio34.GCombustivel.Dominio.Exceptions;
-using System;
 
 namespace Damasio34.GCombustivel.Dominio
 {
     public class Trecho
     {
-        public Trecho(string codigo, double quilometragem)
+        public Trecho(Rota rota, Veiculo veiculo, string codigo, double quilometragem)
         {
             if (quilometragem <= 0) throw new QuilometragemZeradaException();
             this.Quilometragem = quilometragem;
 
+            veiculo.Trechos.Add(this);
             this.Codigo = codigo;
-        }
-        public Trecho(string codigo, double quilometragem, Veiculo veiculo) : this(codigo, quilometragem)
-        {
-            if (quilometragem <= 0) throw new QuilometragemZeradaException();
-            this.Quilometragem = quilometragem;
-
-            this.Codigo = codigo;
-
-            veiculo.AdiconarTrecho(this);
-            this.Veiculo = veiculo;            
+            this.Rota = rota;
         }
 
-        public Veiculo Veiculo { get; }
+        public Rota Rota { get; set; }
         public double Quilometragem { get; private set; }
-        public string Codigo { get; }
+        public string Codigo { get; }        
     }
 }

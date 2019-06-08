@@ -11,7 +11,7 @@ namespace Damasio34.GCombustivel.Teste
         [ExpectedException(typeof(QuilometragemZeradaException))]
         public void Nao_Deve_Existir_Trecho_Com_Km_Zero()
         {
-            new Trecho("A", 0);            
+            new Trecho(null, null, "A", 0);            
         }
         public void Deve_Haver_Apenas_Uma_Rota_Por_Carro()
         {
@@ -24,9 +24,8 @@ namespace Damasio34.GCombustivel.Teste
         public void Media_consumo_ate_cidade_a()
         {
             var veiculo = new Veiculo(1, 7);
-            var trecho = new Trecho("A", 35);
-            veiculo.AdiconarTrecho(trecho);
             var rota = new Rota(1, veiculo);
+            var trecho = new Trecho(rota, veiculo, "A", 35);            
 
             Assert.AreEqual(rota.ConsumoMedio, 5, 0.1);
         }
@@ -35,9 +34,8 @@ namespace Damasio34.GCombustivel.Teste
         public void Media_consumo_ate_cidade_b()
         {
             var veiculo = new Veiculo(1, 7);
-            var trecho = new Trecho("B", 80);
-            veiculo.AdiconarTrecho(trecho);
             var rota = new Rota(1, veiculo);
+            var trecho = new Trecho(rota, veiculo, "B", 80);            
 
             Assert.AreEqual(rota.ConsumoMedio, 11.42857, 0.1);
         }
@@ -46,9 +44,8 @@ namespace Damasio34.GCombustivel.Teste
         public void Media_consumo_ate_cidade_c()
         {
             var veiculo = new Veiculo(1, 7);
-            var trecho = new Trecho("C", 22);
-            veiculo.AdiconarTrecho(trecho);
             var rota = new Rota(1, veiculo);
+            var trecho = new Trecho(rota, veiculo, "C", 22);            
 
             Assert.AreEqual(rota.ConsumoMedio, 3.142857, 0.1);
         }
@@ -61,13 +58,10 @@ namespace Damasio34.GCombustivel.Teste
         public void Media_consumo_por_dia()
         {
             var veiculo = new Veiculo(1, 7);
-            var trechoA = new Trecho("A", 35);
-            var trechoB = new Trecho("B", 80);
-            var trechoC = new Trecho("C", 22);
-            veiculo.AdiconarTrecho(trechoA);
-            veiculo.AdiconarTrecho(trechoB);
-            veiculo.AdiconarTrecho(trechoC);
-            var rota = new Rota(1, veiculo);            
+            var rota = new Rota(1, veiculo);
+            var trechoA = new Trecho(rota, veiculo, "A", 35);
+            var trechoB = new Trecho(rota, veiculo, "B", 80);
+            var trechoC = new Trecho(rota, veiculo, "C", 22);                       
 
             Assert.AreEqual(rota.ConsumoMedio, 19.57142857, 0.1);
         }

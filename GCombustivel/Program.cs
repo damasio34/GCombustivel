@@ -1,5 +1,6 @@
 ﻿using Aplicacao;
 using System;
+using System.Linq;
 
 namespace GCombustivel
 {
@@ -20,12 +21,13 @@ namespace GCombustivel
                 {
                     //CARRO A: 35 km CIDADE A, 80 km CIDADE B, 22 km VOLTAR
                     var mensagem = $"CARRO {veiculo.Codigo}: ";
-                    foreach (var trecho in veiculo.Trechos)
+                    foreach (var trecho in veiculo.Trechos.Where(p => p.Rota.Dia == rota.Dia))
                     {
                         if (trecho.Codigo.Equals("0")) mensagem = mensagem + $"{trecho.Quilometragem} km VOLTAR ";
                         else mensagem = mensagem + $"{trecho.Quilometragem} km CIDADE {trecho.Codigo}, "; 
                     }
                     Console.WriteLine(mensagem);
+                    Console.WriteLine("");
                 }
             }
 
