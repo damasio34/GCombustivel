@@ -8,8 +8,9 @@ namespace GCombustivel
     {
         static void Main(string[] args)
         {
-            var class1 = new RotaService();
-            var rotas = class1.LerArquivo();
+            var arquivoService = new ArquivoService();
+            var rotaService = new RotaService();
+            var rotas = rotaService.LerRelatorio(arquivoService, "entrada_func_a.txt");
 
             foreach (var rota in rotas)
             {

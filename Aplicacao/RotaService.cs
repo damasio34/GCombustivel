@@ -1,28 +1,18 @@
 ﻿using Damasio34.GCombustivel.Dominio;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace Aplicacao
 {
     public class RotaService
     {
-        public IEnumerable<Rota> LerArquivo()
+        public IEnumerable<Rota> LerRelatorio(ArquivoService arquivoService, string nomeDoArquivo)
         {
-            var queue = this.LerArquivoDeEntrada("entrada_func_a.txt");
+            var queue = arquivoService.LerArquivoDeEntrada(nomeDoArquivo);
             var veiculos = ObterVeiculos(queue);
             var rotas = ObterRotas(queue, veiculos);
 
             return rotas;
-        }
-
-        public Queue<string> LerArquivoDeEntrada(string nomeDoArquivo)
-        {
-            var path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-            var linhas = File.ReadAllLines($"{path}/Inputs/{nomeDoArquivo}");
-            var queue = new Queue<string>(linhas);
-
-            return queue;
         }
 
         public List<Rota> ObterRotas(Queue<string> linhas, IEnumerable<Veiculo> veiculos)
@@ -67,6 +57,7 @@ namespace Aplicacao
 
             return ObterTrechos(linhas, roteiro, trechos);
         }
+
         public IEnumerable<Veiculo> ObterVeiculos(Queue<string> linhas)
         {
             var quantidadeDeVeiculos = int.Parse(linhas.Dequeue());
