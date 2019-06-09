@@ -1,8 +1,6 @@
 ﻿using Aplicacao;
 using Damasio34.GCombustivel.Dominio;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace Damasio34.GCombustivel.Teste
@@ -23,12 +21,8 @@ namespace Damasio34.GCombustivel.Teste
         [TestMethod]
         public void Obtem_lista_de_veiculos()
         {
-            var path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-            var linhas = File.ReadAllLines($"{path}/Inputs/entrada_veiculos_teste.txt");
-            var queue = new Queue<string>(linhas);
-
-
             var rotaService = new RotaService();
+            var queue = rotaService.LerArquivoDeEntrada("entrada_veiculos_teste.txt");
             var veiculos = rotaService.ObterVeiculos(queue).ToArray();
 
             Assert.AreEqual(veiculos.Count(), 3);
@@ -44,14 +38,10 @@ namespace Damasio34.GCombustivel.Teste
         [TestMethod]
         public void Obtem_lista_de_trechos()
         {
-            var path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-            var linhas = File.ReadAllLines($"{path}/Inputs/entrada_trechos_teste.txt");
-            var queue = new Queue<string>(linhas);
-
             var rotaService = new RotaService();
+            var queue = rotaService.LerArquivoDeEntrada("entrada_trechos_teste.txt");
             var veiculo = new Veiculo(1, 7);
-            var rota = new Rota(1, veiculo);
-            var trechos = rotaService.ObterTrechos(queue, rota, veiculo).ToArray();
+            var trechos = rotaService.ObterTrechos(queue, veiculo).ToArray();
 
             Assert.AreEqual(trechos.Count(), 8);
             Assert.AreEqual(trechos[0].Codigo, "119");
@@ -75,12 +65,8 @@ namespace Damasio34.GCombustivel.Teste
         [TestMethod]
         public void Obtem_lista_de_rotas()
         {
-            var path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-            var linhas = File.ReadAllLines($"{path}/Inputs/entrada_func_a.txt");
-            var queue = new Queue<string>(linhas);
-
-
             var rotaService = new RotaService();
+            var queue = rotaService.LerArquivoDeEntrada("entrada_func_a.txt");
             var veiculos = rotaService.ObterVeiculos(queue).ToArray();
 
             Assert.AreEqual(veiculos.Count(), 3);

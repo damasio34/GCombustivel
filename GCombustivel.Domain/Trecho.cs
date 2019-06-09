@@ -6,13 +6,9 @@ namespace Damasio34.GCombustivel.Dominio
     public class Trecho
     {
         [Obsolete]
-        public Trecho(Rota rota, Veiculo veiculo, string codigo, double quilometragem)
+        public Trecho(Veiculo veiculo, string codigo, double quilometragem) : this(codigo, quilometragem)
         {
-            if (quilometragem <= 0) throw new QuilometragemZeradaException();
-            this.Quilometragem = quilometragem;
-
             veiculo.Trechos.Add(this);
-            this.Codigo = codigo;
         }
 
         internal Trecho(string codigo, double quilometragem)

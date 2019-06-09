@@ -9,10 +9,7 @@ namespace Aplicacao
     {
         public IEnumerable<Rota> LerArquivo()
         {
-            var path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-            var linhas = File.ReadAllLines($"{path}/Inputs/entrada_func_a.txt");
-            var queue = new Queue<string>(linhas);
-
+            var queue = this.LerArquivoDeEntrada("entrada_func_a.txt");
             var veiculos = ObterVeiculos(queue);
             var rotas = ObterRotas(queue, veiculos);
 
@@ -51,25 +48,25 @@ namespace Aplicacao
             }
             else rota.AdicionarVeiculo(veiculo);
 
-            ObterTrechos(linhas, rota, veiculo);
+            ObterTrechos(linhas, veiculo);
 
             linhas.Dequeue();
 
             return ObterRotas(linhas, veiculos, numeroDeDias, rotas);
         }
 
-        public List<Trecho> ObterTrechos(Queue<string> linhas, Rota rota, Veiculo veiculo) 
-            => this.ObterTrechos(linhas, rota, veiculo, new List<Trecho>());
-        private List<Trecho> ObterTrechos(Queue<string> linhas, Rota rota, Veiculo veiculo, List<Trecho> trechos)
+        public List<Trecho> ObterTrechos(Queue<string> linhas, Veiculo veiculo) 
+            => this.ObterTrechos(linhas, veiculo, new List<Trecho>());
+        private List<Trecho> ObterTrechos(Queue<string> linhas, Veiculo veiculo, List<Trecho> trechos)
         {
             if (linhas.Peek() == "") return trechos;
             var linha = linhas.Dequeue().Split(' ');
             var codigoDaCidade = linha[0];
             var quilometragem = int.Parse(linha[1]);
 
-            trechos.Add(new Trecho(rota, veiculo, codigoDaCidade, quilometragem));
+            trechos.Add(new Trecho(veiculo, codigoDaCidade, quilometragem));
 
-            return ObterTrechos(linhas, rota, veiculo, trechos);
+            return ObterTrechos(linhas, veiculo, trechos);
         }
         public IEnumerable<Veiculo> ObterVeiculos(Queue<string> linhas)
         {
