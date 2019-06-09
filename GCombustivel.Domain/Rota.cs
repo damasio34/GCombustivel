@@ -1,24 +1,45 @@
-﻿using System.Collections.Generic;
+﻿using Damasio34.GCombustivel.Dominio.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Damasio34.GCombustivel.Dominio
 {
     public class Rota
     {
+        [Obsolete]
         public Rota(int dia, Veiculo veiculo)
         {
             this.Dia = dia;
             this.AdicionarVeiculo(veiculo);
         }
 
-        public int Dia { get; }
-        public List<Veiculo> Veiculos { get; } = new List<Veiculo>();
-
-        public double ConsumoMedio => 1;//this.Trechos.Sum(p => p.Quilometragem / p.Veiculo.QuilometroPorLitro);
-
-        public void AdicionarVeiculo(Veiculo veiculo)
+        public Rota(int dia)
         {
-            //veiculo.Rotas.Add(this);
-            this.Veiculos.Add(veiculo);            
+            this.Dia = dia;
+        }
+
+        public int Dia { get; }
+        public List<Roteiro> Roteiros { get; } = new List<Roteiro>();
+
+        public double ConsumoMedio => this.Roteiros.Sum(x => x.ConsumoMedio);
+
+        public Roteiro AdicionarVeiculo(Veiculo veiculo)
+        {
+            if (this.Roteiros.Any(p => p.Veiculo.Codigo.Equals(veiculo.Codigo)))
+                throw new VeiculoEmRotaException();
+
+            var roteiro = new Roteiro(veiculo);
+            this.Roteiros.Add(roteiro);
+
+            return roteiro;
+        }
+        public void AdicionarTrecho(Veiculo veiculo, string cidade, double quilometragem)
+        {
+            var roteiro = this.Roteiros.SingleOrDefault(p => p.Veiculo.Codigo.Equals(veiculo.Codigo));
+            if (roteiro == null) roteiro = this.AdicionarVeiculo(veiculo);
+
+            roteiro.AdicionarTrecho(cidade, quilometragem);
         }
     }
 }

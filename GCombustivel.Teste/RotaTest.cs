@@ -5,27 +5,34 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Damasio34.GCombustivel.Teste
 {
     [TestClass]
-    public class UnitTest
+    public class RotaTest
     {        
         [TestMethod]
         [ExpectedException(typeof(QuilometragemZeradaException))]
         public void Nao_Deve_Existir_Trecho_Com_Km_Zero()
-        {
-            new Trecho(null, null, "A", 0);            
+        {            
+            var rota = new Rota(1);
+            var veiculo = new Veiculo(1, 7);
+            rota.AdicionarTrecho(veiculo, "A", 0);
         }
+        [TestMethod]
+        [ExpectedException(typeof(VeiculoEmRotaException))]
         public void Deve_Haver_Apenas_Uma_Rota_Por_Carro()
         {
-            //var rota = new Rota();
-            //var veiculo = new Veiculo(rota);
+            var rota = new Rota(1);
+            var veiculo = new Veiculo(1, 7);
+            rota.AdicionarVeiculo(veiculo);
+            rota.AdicionarVeiculo(veiculo);
+
         }
         //MEDIA_CARRO_X_TRECHO_J = KILOMETRAGEM_TRECHO_PRA_CIDADE_J / CONSUMO_CARRO_X
         //media do carro A, no dia 1, trecho até CIDADE A = 35 km / 7 km/l = 5 litros
         [TestMethod]
         public void Media_consumo_ate_cidade_a()
         {
+            var rota = new Rota(1);
             var veiculo = new Veiculo(1, 7);
-            var rota = new Rota(1, veiculo);
-            var trecho = new Trecho(rota, veiculo, "A", 35);            
+            rota.AdicionarTrecho(veiculo, "A", 35);
 
             Assert.AreEqual(rota.ConsumoMedio, 5, 0.1);
         }
@@ -33,9 +40,9 @@ namespace Damasio34.GCombustivel.Teste
         [TestMethod]
         public void Media_consumo_ate_cidade_b()
         {
+            var rota = new Rota(1);
             var veiculo = new Veiculo(1, 7);
-            var rota = new Rota(1, veiculo);
-            var trecho = new Trecho(rota, veiculo, "B", 80);            
+            rota.AdicionarTrecho(veiculo, "B", 80);
 
             Assert.AreEqual(rota.ConsumoMedio, 11.42857, 0.1);
         }
@@ -43,9 +50,9 @@ namespace Damasio34.GCombustivel.Teste
         [TestMethod]
         public void Media_consumo_ate_cidade_c()
         {
+            var rota = new Rota(1);
             var veiculo = new Veiculo(1, 7);
-            var rota = new Rota(1, veiculo);
-            var trecho = new Trecho(rota, veiculo, "C", 22);            
+            rota.AdicionarTrecho(veiculo, "C", 22);
 
             Assert.AreEqual(rota.ConsumoMedio, 3.142857, 0.1);
         }
@@ -57,11 +64,11 @@ namespace Damasio34.GCombustivel.Teste
         [TestMethod]
         public void Media_consumo_por_dia()
         {
+            var rota = new Rota(1);
             var veiculo = new Veiculo(1, 7);
-            var rota = new Rota(1, veiculo);
-            var trechoA = new Trecho(rota, veiculo, "A", 35);
-            var trechoB = new Trecho(rota, veiculo, "B", 80);
-            var trechoC = new Trecho(rota, veiculo, "C", 22);                       
+            rota.AdicionarTrecho(veiculo, "A", 35);
+            rota.AdicionarTrecho(veiculo, "B", 80);
+            rota.AdicionarTrecho(veiculo, "C", 22);
 
             Assert.AreEqual(rota.ConsumoMedio, 19.57142857, 0.1);
         }

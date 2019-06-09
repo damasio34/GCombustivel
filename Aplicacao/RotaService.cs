@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Aplicacao
 {
-    public class Class1
+    public class RotaService
     {
         public IEnumerable<Rota> LerArquivo()
         {
@@ -13,10 +13,19 @@ namespace Aplicacao
             var linhas = File.ReadAllLines($"{path}/Inputs/entrada_func_a.txt");
             var queue = new Queue<string>(linhas);
 
-            var veiculos = ObterVeiculos(queue).ToList();
+            var veiculos = ObterVeiculos(queue);
             var rotas = ObterRotas(queue, veiculos);
 
             return rotas;
+        }
+
+        public Queue<string> LerArquivoDeEntrada(string nomeDoArquivo)
+        {
+            var path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            var linhas = File.ReadAllLines($"{path}/Inputs/{nomeDoArquivo}");
+            var queue = new Queue<string>(linhas);
+
+            return queue;
         }
 
         private List<Rota> ObterRotas(Queue<string> linhas, IEnumerable<Veiculo> veiculos, int numeroDeDias = 0, List<Rota> rotas = null)
@@ -31,7 +40,7 @@ namespace Aplicacao
             var veiculo = veiculos.Single(p => p.Codigo.Equals(codigoDoVeiculo));
 
             //Considerando que não pode haver mais de uma rota para um mesmo veículo no mesmo dia
-            var quantidadeDeRotaParaOVeiculo = rotas.Count(p => p.Veiculos.Any(x => x.Codigo.Equals(codigoDoVeiculo)));
+            var quantidadeDeRotaParaOVeiculo = rotas.Count(p => p.Roteiros.Any(x => x.Veiculo.Codigo.Equals(codigoDoVeiculo)));
             var dia = quantidadeDeRotaParaOVeiculo == 0 ? 1 : quantidadeDeRotaParaOVeiculo + 1;
 
             var rota = rotas.SingleOrDefault(p => p.Dia.Equals(dia));
@@ -48,19 +57,21 @@ namespace Aplicacao
 
             return ObterRotas(linhas, veiculos, numeroDeDias, rotas);
         }
-        private List<Trecho> ObterTrechos(Queue<string> linhas, Rota rota, Veiculo veiculo, List<Trecho> trechos = null)
+
+        public List<Trecho> ObterTrechos(Queue<string> linhas, Rota rota, Veiculo veiculo) 
+            => this.ObterTrechos(linhas, rota, veiculo, new List<Trecho>());
+        private List<Trecho> ObterTrechos(Queue<string> linhas, Rota rota, Veiculo veiculo, List<Trecho> trechos)
         {
             if (linhas.Peek() == "") return trechos;
             var linha = linhas.Dequeue().Split(' ');
             var codigoDaCidade = linha[0];
             var quilometragem = int.Parse(linha[1]);
 
-            if (trechos == null) trechos = new List<Trecho>();
             trechos.Add(new Trecho(rota, veiculo, codigoDaCidade, quilometragem));
 
             return ObterTrechos(linhas, rota, veiculo, trechos);
         }
-        private IEnumerable<Veiculo> ObterVeiculos(Queue<string> linhas)
+        public IEnumerable<Veiculo> ObterVeiculos(Queue<string> linhas)
         {
             var quantidadeDeVeiculos = int.Parse(linhas.Dequeue());
             for (int i = 1; i < quantidadeDeVeiculos + 1; i++)

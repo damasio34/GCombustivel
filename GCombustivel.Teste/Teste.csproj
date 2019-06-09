@@ -49,16 +49,18 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest.cs" />
+    <Compile Include="LeituraDeArquivoTest.cs" />
+    <Compile Include="RotaTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Inputs\entrada_func_a.txt" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\Aplicacao\Aplicacao.csproj">
+      <Project>{243DF8CD-CA23-454F-9E35-77CCB26D25E2}</Project>
+      <Name>Aplicacao</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GCombustivel.Domain\Dominio.csproj">
       <Project>{b1f7051b-00cd-4403-adc5-3d9bb4e06b03}</Project>
       <Name>Dominio</Name>
