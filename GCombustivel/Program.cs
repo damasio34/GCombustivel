@@ -31,6 +31,13 @@ namespace GCombustivel
                 }
             }
 
+            Console.WriteLine("+ --------------------------------------------------+");
+            Console.WriteLine("Pressione qualquer tecla para gerar arquivo de saída.");
+            Console.WriteLine("+ --------------------------------------------------+");
+            Console.ReadKey();
+
+            rotaService.EscreverRelatorio(arquivoService, "saida_func_A", rotas);
+            Console.WriteLine("Arquivo gerado com sucesso!");
             Console.ReadKey();
         }
     }

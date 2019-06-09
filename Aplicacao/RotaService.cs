@@ -16,9 +16,9 @@ namespace Aplicacao
 
             return rotas;
         }
-        public IEnumerable<string> EscreverRelatorio(ArquivoService arquivoService, string nomeDoArquivo, List<Rota> rotas)
+        public IEnumerable<string> EscreverRelatorio(ArquivoService arquivoService, string nomeDoArquivo, IEnumerable<Rota> rotas)
         {
-            var linhas = new List<string> { rotas.Count.ToString() };
+            var linhas = new List<string> { rotas.Count().ToString() };
             foreach (var rota in rotas)
             {
                 foreach (var roteiro in rota.Roteiros)
