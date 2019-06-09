@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Damasio34.GCombustivel.Dominio
+﻿namespace Damasio34.GCombustivel.Dominio
 {
     public class Veiculo
     {
@@ -12,6 +10,5 @@ namespace Damasio34.GCombustivel.Dominio
 
         public int Codigo { get; }
         public int QuilometroPorLitro { get; }
-        public List<Trecho> Trechos { get; private set; } = new List<Trecho>();
     }
 }

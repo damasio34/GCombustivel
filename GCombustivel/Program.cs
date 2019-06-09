@@ -18,11 +18,11 @@ namespace GCombustivel
                 Console.WriteLine($"| ROTA DIA {rota.Dia} | ");
                 Console.WriteLine("+-------------+");
 
-                foreach (var veiculo in rota.Roteiros.Select(p => p.Veiculo))
+                foreach (var roteiro in rota.Roteiros)
                 {
                     //CARRO A: 35 km CIDADE A, 80 km CIDADE B, 22 km VOLTAR
-                    var mensagem = $"CARRO {veiculo.Codigo}: ";
-                    foreach (var trecho in veiculo.Trechos)
+                    var mensagem = $"CARRO {roteiro.Veiculo.Codigo}: ";
+                    foreach (var trecho in roteiro.Trechos)
                     {
                         if (trecho.Cidade.Equals("0")) mensagem = mensagem + $"{trecho.Quilometragem} km VOLTAR ";
                         else mensagem = mensagem + $"{trecho.Quilometragem} km CIDADE {trecho.Cidade}, "; 

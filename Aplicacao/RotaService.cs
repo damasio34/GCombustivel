@@ -9,7 +9,7 @@ namespace Aplicacao
         public IEnumerable<Rota> LerRelatorio(ArquivoService arquivoService, string nomeDoArquivo)
         {
             var queue = arquivoService.LerArquivoDeEntrada(nomeDoArquivo);
-            var veiculos = ObterVeiculos(queue);
+            var veiculos = ObterVeiculos(queue).ToList();
             var rotas = ObterRotas(queue, veiculos);
 
             return rotas;
