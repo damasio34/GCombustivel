@@ -76,18 +76,6 @@ namespace Damasio34.GCombustivel.Teste
             Assert.AreEqual(rota.ConsumoMedio, 19.57142857, 0.1);
         }
 
-        //1.    A primeira linha possui um número inteiro "D" com a quantidade de dias do relatorio
-        //2.    A partir da segunda linha do arquivo, o seguinte padrão se repetirá "D" vezes:
-        //2.1   Um número inteiro com o código do veículo(do arquivo de entrada), seguido de um espaço em branco e um número
-        //     fracionário, com 2 casas decimais, com a média do consumo total do veículo no dia.
-        //2.3   Uma linha em branco para determinar o fim do bloco
-        public void FatiarArquivoDeSaida()
-        {
-            var quantidadeDeDias = 2;
-
-        }
-
-
         [TestMethod]
         public void Obter_lista_de_veiculos()
         {

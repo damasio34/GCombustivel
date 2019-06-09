@@ -9,14 +9,14 @@ namespace Aplicacao
 
         public Queue<string> LerArquivoDeEntrada(string nomeDoArquivo)
         {
-            var linhas = File.ReadAllLines($"{_path}/Inputs/{nomeDoArquivo}");
+            var linhas = File.ReadAllLines($"{_path}/Entradas/{nomeDoArquivo}");
             var queue = new Queue<string>(linhas);
 
             return queue;
         }
-        public void EscreverArquivoDeSaida(Queue<string> linhas, string nomeDoArquivo)
+        public void EscreverArquivoDeSaida(IEnumerable<string> linhas, string nomeDoArquivo)
         {
-            File.WriteAllLines($"{_path}/Inputs/{nomeDoArquivo}", linhas);
+            File.WriteAllLines($"{_path}/Saidas/{nomeDoArquivo}", linhas);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Damasio34.GCombustivel.Dominio;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Aplicacao
@@ -14,6 +16,22 @@ namespace Aplicacao
 
             return rotas;
         }
+        public IEnumerable<string> EscreverRelatorio(ArquivoService arquivoService, string nomeDoArquivo, List<Rota> rotas)
+        {
+            var linhas = new List<string> { rotas.Count.ToString() };
+            foreach (var rota in rotas)
+            {
+                foreach (var roteiro in rota.Roteiros)
+                {
+                    var consumoMedio = (Math.Truncate(100 * roteiro.ConsumoMedio) / 100).ToString("0.00", new CultureInfo("en-US", false));
+                    linhas.Add($"{roteiro.Veiculo.Codigo} {consumoMedio}");
+                }
+                linhas.Add("");
+            }
+
+            arquivoService.EscreverArquivoDeSaida(linhas, nomeDoArquivo);
+            return linhas;
+        }
 
         public List<Rota> ObterRotas(Queue<string> linhas, IEnumerable<Veiculo> veiculos)
             => this.ObterRotas(linhas, veiculos, 0, new List<Rota>());
@@ -23,8 +41,6 @@ namespace Aplicacao
 
             if (!linhas.Any()) return rotas;
             if (numeroDeDias == 0) numeroDeDias = int.Parse(linhas.Dequeue());
-            
-            //var veiculo = veiculos.Single(p => p.Codigo.Equals(codigoDoVeiculo));
             
             var rota = new Rota(dia);
 

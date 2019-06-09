@@ -1,6 +1,5 @@
 ﻿using Aplicacao;
 using System;
-using System.Linq;
 
 namespace GCombustivel
 {
