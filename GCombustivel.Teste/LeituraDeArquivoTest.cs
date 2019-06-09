@@ -41,24 +41,25 @@ namespace Damasio34.GCombustivel.Teste
             var rotaService = new RotaService();
             var queue = rotaService.LerArquivoDeEntrada("entrada_trechos_teste.txt");
             var veiculo = new Veiculo(1, 7);
-            var trechos = rotaService.ObterTrechos(queue, veiculo).ToArray();
+            var roteiro = new Roteiro(veiculo);
+            var trechos = rotaService.ObterTrechos(queue, roteiro).ToArray();
 
             Assert.AreEqual(trechos.Count(), 8);
-            Assert.AreEqual(trechos[0].Codigo, "119");
+            Assert.AreEqual(trechos[0].Cidade, "119");
             Assert.AreEqual(trechos[0].Quilometragem, 47);
-            Assert.AreEqual(trechos[1].Codigo, "8");
+            Assert.AreEqual(trechos[1].Cidade, "8");
             Assert.AreEqual(trechos[1].Quilometragem, 230);
-            Assert.AreEqual(trechos[2].Codigo, "107");
+            Assert.AreEqual(trechos[2].Cidade, "107");
             Assert.AreEqual(trechos[2].Quilometragem, 48);
-            Assert.AreEqual(trechos[3].Codigo, "10");
+            Assert.AreEqual(trechos[3].Cidade, "10");
             Assert.AreEqual(trechos[3].Quilometragem, 65);
-            Assert.AreEqual(trechos[4].Codigo, "9");
+            Assert.AreEqual(trechos[4].Cidade, "9");
             Assert.AreEqual(trechos[4].Quilometragem, 197);
-            Assert.AreEqual(trechos[5].Codigo, "35");
+            Assert.AreEqual(trechos[5].Cidade, "35");
             Assert.AreEqual(trechos[5].Quilometragem, 236);
-            Assert.AreEqual(trechos[6].Codigo, "129");
+            Assert.AreEqual(trechos[6].Cidade, "129");
             Assert.AreEqual(trechos[6].Quilometragem, 142);
-            Assert.AreEqual(trechos[7].Codigo, "0");
+            Assert.AreEqual(trechos[7].Cidade, "0");
             Assert.AreEqual(trechos[7].Quilometragem, 71);
         }
 

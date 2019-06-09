@@ -23,8 +23,8 @@ namespace GCombustivel
                     var mensagem = $"CARRO {veiculo.Codigo}: ";
                     foreach (var trecho in veiculo.Trechos)
                     {
-                        if (trecho.Codigo.Equals("0")) mensagem = mensagem + $"{trecho.Quilometragem} km VOLTAR ";
-                        else mensagem = mensagem + $"{trecho.Quilometragem} km CIDADE {trecho.Codigo}, "; 
+                        if (trecho.Cidade.Equals("0")) mensagem = mensagem + $"{trecho.Quilometragem} km VOLTAR ";
+                        else mensagem = mensagem + $"{trecho.Quilometragem} km CIDADE {trecho.Cidade}, "; 
                     }
                     Console.WriteLine(mensagem);
                     Console.WriteLine("");

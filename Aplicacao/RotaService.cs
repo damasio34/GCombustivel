@@ -48,25 +48,25 @@ namespace Aplicacao
             }
             else rota.AdicionarVeiculo(veiculo);
 
-            ObterTrechos(linhas, veiculo);
+            ObterTrechos(linhas, new Roteiro(veiculo));
 
             linhas.Dequeue();
 
             return ObterRotas(linhas, veiculos, numeroDeDias, rotas);
         }
 
-        public List<Trecho> ObterTrechos(Queue<string> linhas, Veiculo veiculo) 
-            => this.ObterTrechos(linhas, veiculo, new List<Trecho>());
-        private List<Trecho> ObterTrechos(Queue<string> linhas, Veiculo veiculo, List<Trecho> trechos)
+        public List<Trecho> ObterTrechos(Queue<string> linhas, Roteiro roteiro) 
+            => this.ObterTrechos(linhas, roteiro, new List<Trecho>());
+        private List<Trecho> ObterTrechos(Queue<string> linhas, Roteiro roteiro, List<Trecho> trechos)
         {
             if (linhas.Peek() == "") return trechos;
             var linha = linhas.Dequeue().Split(' ');
             var codigoDaCidade = linha[0];
             var quilometragem = int.Parse(linha[1]);
 
-            trechos.Add(new Trecho(veiculo, codigoDaCidade, quilometragem));
+            trechos.Add(new Trecho(roteiro, codigoDaCidade, quilometragem));
 
-            return ObterTrechos(linhas, veiculo, trechos);
+            return ObterTrechos(linhas, roteiro, trechos);
         }
         public IEnumerable<Veiculo> ObterVeiculos(Queue<string> linhas)
         {

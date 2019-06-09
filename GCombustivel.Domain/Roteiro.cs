@@ -10,7 +10,7 @@ namespace Damasio34.GCombustivel.Dominio
             this.Veiculo = veiculo;
         }
 
-        private List<Trecho> _trechos = new List<Trecho>();
+        private readonly List<Trecho> _trechos = new List<Trecho>();
 
         public Veiculo Veiculo { get; }
         public IEnumerable<Trecho> Trechos => this._trechos;
@@ -19,6 +19,10 @@ namespace Damasio34.GCombustivel.Dominio
         public void AdicionarTrecho(string cidade, double quilometragem)
         {
             var trecho = new Trecho(cidade, quilometragem);
+            this._trechos.Add(trecho);
+        }
+        internal void AdicionarTrecho(Trecho trecho)
+        {
             this._trechos.Add(trecho);
         }
         public double ConsumoMedio => this.Trechos.Sum(x => x.Quilometragem / Veiculo.QuilometroPorLitro);
