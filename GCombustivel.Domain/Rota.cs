@@ -7,13 +7,6 @@ namespace Damasio34.GCombustivel.Dominio
 {
     public class Rota
     {
-        [Obsolete]
-        public Rota(int dia, Veiculo veiculo)
-        {
-            this.Dia = dia;
-            this.AdicionarVeiculo(veiculo);
-        }
-
         public Rota(int dia)
         {
             this.Dia = dia;

@@ -25,34 +25,33 @@ namespace Aplicacao
             return queue;
         }
 
-        private List<Rota> ObterRotas(Queue<string> linhas, IEnumerable<Veiculo> veiculos, int numeroDeDias = 0, List<Rota> rotas = null)
+        public List<Rota> ObterRotas(Queue<string> linhas, IEnumerable<Veiculo> veiculos)
+            => this.ObterRotas(linhas, veiculos, 0, new List<Rota>());
+        private List<Rota> ObterRotas(Queue<string> linhas, IEnumerable<Veiculo> veiculos, int numeroDeDias, List<Rota> rotas)
         {
+            int dia = numeroDeDias + 1;
+
             if (!linhas.Any()) return rotas;
-            if (rotas == null) rotas = new List<Rota>();
             if (numeroDeDias == 0) numeroDeDias = int.Parse(linhas.Dequeue());
+            
+            //var veiculo = veiculos.Single(p => p.Codigo.Equals(codigoDoVeiculo));
+            
+            var rota = new Rota(dia);
 
-            var codigoDoVeiculo = int.Parse(linhas.Dequeue());
-            var quantidadeDeTrechos = int.Parse(linhas.Dequeue()); // Não precisei utulizar
-
-            var veiculo = veiculos.Single(p => p.Codigo.Equals(codigoDoVeiculo));
-
-            //Considerando que não pode haver mais de uma rota para um mesmo veículo no mesmo dia
-            var quantidadeDeRotaParaOVeiculo = rotas.Count(p => p.Roteiros.Any(x => x.Veiculo.Codigo.Equals(codigoDoVeiculo)));
-            var dia = quantidadeDeRotaParaOVeiculo == 0 ? 1 : quantidadeDeRotaParaOVeiculo + 1;
-
-            var rota = rotas.SingleOrDefault(p => p.Dia.Equals(dia));
-            if (rota == null)
+            foreach (var veiculo in veiculos)
             {
-                rota = new Rota(dia, veiculo);
-                rotas.Add(rota);
+                var codigoDoVeiculo = int.Parse(linhas.Dequeue());
+                var quantidadeDeTrechos = int.Parse(linhas.Dequeue()); // Não foi necessário utulizar
+                var roteiro = new Roteiro(veiculo);
+                var trechos = ObterTrechos(linhas, roteiro);                
+                rota.Roteiros.Add(roteiro);
+
+                linhas.Dequeue();
             }
-            else rota.AdicionarVeiculo(veiculo);
 
-            ObterTrechos(linhas, new Roteiro(veiculo));
+            rotas.Add(rota);
 
-            linhas.Dequeue();
-
-            return ObterRotas(linhas, veiculos, numeroDeDias, rotas);
+            return ObterRotas(linhas, veiculos, dia, rotas);
         }
 
         public List<Trecho> ObterTrechos(Queue<string> linhas, Roteiro roteiro) 

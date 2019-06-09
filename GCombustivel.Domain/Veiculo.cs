@@ -1,6 +1,4 @@
-﻿using Damasio34.GCombustivel.Dominio.Exceptions;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace Damasio34.GCombustivel.Dominio
 {
@@ -14,13 +12,6 @@ namespace Damasio34.GCombustivel.Dominio
 
         public int Codigo { get; }
         public int QuilometroPorLitro { get; }
-        //public IEnumerable<Rota> Rotas => Trechos.Select(p => p.Rota);
         public List<Trecho> Trechos { get; private set; } = new List<Trecho>();
-
-        //public void AdiconarRota(Rota rota)
-        //{
-        //    if (this.Rotas.Any(p => p.Dia.Equals(rota.Dia))) throw new VeiculoEmRotaException();
-        //    this.Rotas.Add(rota);
-        //}
     }
 }
