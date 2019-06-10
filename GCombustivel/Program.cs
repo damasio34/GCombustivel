@@ -36,8 +36,14 @@ namespace GCombustivel
             Console.WriteLine("+ --------------------------------------------------+");
             Console.ReadKey();
 
-            rotaService.EscreverRelatorio(arquivoService, "saida_func_A", rotas);
+            rotaService.EscreverRelatorio(arquivoService, "saida_func_a.txt", rotas);            
+
+            Console.WriteLine("+ ------------------------+");
             Console.WriteLine("Arquivo gerado com sucesso!");
+            Console.WriteLine("+ ------------------------+");
+            Console.WriteLine("+ -----------------------------------------------------------+");
+            Console.WriteLine("Pressione qualquer tecla para exibir relatório de combustivel.");
+            Console.WriteLine("+ -----------------------------------------------------------+");
             Console.ReadKey();
 
             var rotasECombustivel = rotaService.LerRelatorioComCombustivel(arquivoService, "entrada_func_b.txt");
@@ -45,10 +51,21 @@ namespace GCombustivel
             foreach (var rota in rotasECombustivel.Item1)
             {
                 restante -= rota.ConsumoMedio;
-                if (restante>0) Console.WriteLine($"ROTA DIA {rota.Dia}: COMBUSTIVEL RESTANTE: {restante} litros");
+                if (restante > 0) Console.WriteLine($"ROTA DIA {rota.Dia}: COMBUSTIVEL RESTANTE: {restante} litros");
                 else Console.WriteLine($"ROTA DIA {rota.Dia}: SEM COMBUSTÌVEL SUFICIENTE");
             }
 
+            Console.WriteLine("+ --------------------------------------------------+");
+            Console.WriteLine("Pressione qualquer tecla para exibir relatório de combustivel.");
+            Console.WriteLine("+ --------------------------------------------------+");
+            Console.ReadKey();
+
+            rotaService.EscreverRelatorioDeCombustivel(arquivoService, "saida_func_b.txt",
+                rotasECombustivel.Item1, rotasECombustivel.Item2);
+
+            Console.WriteLine("+ ------------------------+");
+            Console.WriteLine("Arquivo gerado com sucesso!");
+            Console.WriteLine("+ ------------------------+");
             Console.ReadKey();
         }
     }
