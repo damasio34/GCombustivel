@@ -1,8 +1,7 @@
-﻿using Aplicacao;
+﻿using Damasio34.GCombustivel.Aplicacao.Services;
 using Damasio34.GCombustivel.Dominio;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace Damasio34.GCombustivel.Teste
@@ -56,6 +55,33 @@ namespace Damasio34.GCombustivel.Teste
             Assert.AreEqual(linhas[10], "2 10.87");
             Assert.AreEqual(linhas[11], "3 29.00");
             Assert.AreEqual(linhas[12], "");
+        }
+
+        //1. A primeira linha possui um número inteiro "D" com a quantidade de litros disponiveis no estoque ao final das entregas
+        //2. Uma linha em branco para separar o bloco
+        //3. Uma linha possui um número inteiro "D" com a quantidade de dias do relatorio
+        //2. Nas próximas linhas, o seguinte padrão se repetirá "D" vezes:
+        //2.1 um numero decimal, com 2 casas fracionárias, com a quantidade de combustivel restante ao final do dia ou 0 (zero) se o combustível restante não dá para cumprir a rota do dia
+        //2.2 uma linha em branco definindo o fim do bloco
+        [TestMethod]
+        public void Escrever_arquivo_de_saida_com_combustivel()
+        {
+            var arquivoService = new ArquivoService();
+            var rotaService = new RotaService();
+
+            var rotasECombustivel = rotaService.LerRelatorioComCombustivel(arquivoService, "entrada_rotas_com_combustivel_teste.txt");
+            var rotas = rotasECombustivel.Item1;
+            var combustivel = rotasECombustivel.Item2;
+
+            var linhas = rotaService.EscreverRelatorioDeCombustivel(arquivoService, "saida_combustivel_teste.txt", rotas, combustivel).ToArray();
+
+            Assert.IsNotNull(linhas);
+            Assert.AreEqual(linhas[0], "0");
+            Assert.AreEqual(linhas[1], "");
+            Assert.AreEqual(linhas[2], "55.98");
+            Assert.AreEqual(linhas[3], "9.26");
+            Assert.AreEqual(linhas[4], "0");
+            Assert.AreEqual(linhas[5], "");
         }
     }
 }

@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Damasio34.GCombustivel.Dominio.Interfaces;
+using System.Collections.Generic;
 using System.IO;
 
-namespace Aplicacao
+namespace Damasio34.GCombustivel.Aplicacao.Services
 {
-    public class ArquivoService
+    public class ArquivoService : IArquivoService
     {
         private readonly string _path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
 
@@ -15,8 +16,6 @@ namespace Aplicacao
             return queue;
         }
         public void EscreverArquivoDeSaida(IEnumerable<string> linhas, string nomeDoArquivo)
-        {
-            File.WriteAllLines($"{_path}/Saidas/{nomeDoArquivo}", linhas);
-        }
+            => File.WriteAllLines($"{_path}/Saidas/{nomeDoArquivo}", linhas);
     }
 }

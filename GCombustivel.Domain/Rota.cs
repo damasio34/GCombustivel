@@ -1,5 +1,4 @@
 ﻿using Damasio34.GCombustivel.Dominio.Exceptions;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,10 +6,7 @@ namespace Damasio34.GCombustivel.Dominio
 {
     public class Rota
     {
-        public Rota(int dia)
-        {
-            this.Dia = dia;
-        }
+        public Rota(int dia) { this.Dia = dia; }
 
         public int Dia { get; }
         public List<Roteiro> Roteiros { get; } = new List<Roteiro>();

@@ -1,4 +1,4 @@
-﻿using Aplicacao;
+﻿using Damasio34.GCombustivel.Aplicacao.Services;
 using System;
 
 namespace GCombustivel
@@ -24,7 +24,7 @@ namespace GCombustivel
                     foreach (var trecho in roteiro.Trechos)
                     {
                         if (trecho.Cidade.Equals("0")) mensagem = mensagem + $"{trecho.Quilometragem} km VOLTAR ";
-                        else mensagem = mensagem + $"{trecho.Quilometragem} km CIDADE {trecho.Cidade}, "; 
+                        else mensagem = mensagem + $"{trecho.Quilometragem} km CIDADE {trecho.Cidade}, ";
                     }
                     Console.WriteLine(mensagem);
                     Console.WriteLine("");
@@ -38,6 +38,17 @@ namespace GCombustivel
 
             rotaService.EscreverRelatorio(arquivoService, "saida_func_A", rotas);
             Console.WriteLine("Arquivo gerado com sucesso!");
+            Console.ReadKey();
+
+            var rotasECombustivel = rotaService.LerRelatorioComCombustivel(arquivoService, "entrada_func_b.txt");
+            var restante = rotasECombustivel.Item2;
+            foreach (var rota in rotasECombustivel.Item1)
+            {
+                restante -= rota.ConsumoMedio;
+                if (restante>0) Console.WriteLine($"ROTA DIA {rota.Dia}: COMBUSTIVEL RESTANTE: {restante} litros");
+                else Console.WriteLine($"ROTA DIA {rota.Dia}: SEM COMBUSTÌVEL SUFICIENTE");
+            }
+
             Console.ReadKey();
         }
     }

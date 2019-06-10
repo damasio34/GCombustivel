@@ -1,4 +1,4 @@
-﻿using Aplicacao;
+﻿using Damasio34.GCombustivel.Aplicacao.Services;
 using Damasio34.GCombustivel.Dominio;
 using Damasio34.GCombustivel.Dominio.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -147,6 +147,22 @@ namespace Damasio34.GCombustivel.Teste
             Assert.AreEqual(rotas[1].Roteiros.Count, 3);
             Assert.AreEqual(rotas[2].Dia, 3);
             Assert.AreEqual(rotas[2].Roteiros.Count, 3);
+        }
+
+        [TestMethod]
+
+        public void Calcular_combustivel_gasto_nas_rotas()
+        {
+            var arquivoService = new ArquivoService();
+            var rotaService = new RotaService();
+
+            var rotasECombustivel = rotaService.LerRelatorioComCombustivel(arquivoService, "entrada_rotas_com_combustivel_teste.txt");
+            var rotas = rotasECombustivel.Item1.ToArray();
+            var combustivel = rotasECombustivel.Item2;
+
+            Assert.AreEqual(rotas.Count(), 3);
+            Assert.AreEqual(combustivel - rotas[0].ConsumoMedio, 55.98, 0.1);
+            Assert.AreEqual(combustivel - rotas[0].ConsumoMedio - rotas[1].ConsumoMedio, 9.26, 0.1);   
         }
     }
 }
