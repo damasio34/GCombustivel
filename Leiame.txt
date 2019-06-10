@@ -1,0 +1,8 @@
+#Solução
+Foram aplicados os princípios de SOLID e KISS (Keep It Simple, Stupid) na implementação, porém em alguns cenários foram utilizados algoritmos diferentes para resolver o mesmo problema, como finalidade didática.
+
+#Teste
+A solução contém cobertura de testes para garantir a funcionalidade das regras de negócio e dos requisitos funcionais informado. Foi utilizado TDD como processo de desenvolvimento.
+
+# Como executar
+Para executar a solução, basta compilar e executar a aplicação console (Damasio34.GCombustivel.Console).
