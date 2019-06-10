@@ -8,7 +8,6 @@ namespace Damasio34.GCombustivel.Dominio
         {
             roteiro.AdicionarTrecho(this);
         }
-
         internal Trecho(string cidade, double quilometragem)
         {
             if (quilometragem <= 0) throw new QuilometragemZeradaException();

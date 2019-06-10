@@ -14,12 +14,12 @@ namespace Damasio34.GCombustivel.Aplicacao.Services
             var queue = arquivoService.LerArquivoDeEntrada(nomeDoArquivo);
             var veiculos = ObterVeiculos(queue).ToList();
             var rotas = ObterRotas(queue, veiculos);
-            var combustivel = ObterCombustivelDisponivel(queue);
 
             return rotas;
         }
 
-        public Tuple<IEnumerable<Rota>, double> LerRelatorioComCombustivel(IArquivoService arquivoService, string nomeDoArquivo)
+        public Tuple<IEnumerable<Rota>, double> LerRelatorioComCombustivel(IArquivoService arquivoService, 
+            string nomeDoArquivo)
         {
             var queue = arquivoService.LerArquivoDeEntrada(nomeDoArquivo);
             var veiculos = ObterVeiculos(queue).ToList();
@@ -34,15 +34,16 @@ namespace Damasio34.GCombustivel.Aplicacao.Services
             if (!queue.Any() || queue.Peek() == "") return 0;
             return int.Parse(queue.Dequeue());
         }
-
-        public IEnumerable<string> EscreverRelatorio(IArquivoService arquivoService, string nomeDoArquivo, IEnumerable<Rota> rotas)
+        public IEnumerable<string> EscreverRelatorio(IArquivoService arquivoService, 
+            string nomeDoArquivo, IEnumerable<Rota> rotas)
         {
             var linhas = new List<string> { rotas.Count().ToString() };
             foreach (var rota in rotas)
             {
                 foreach (var roteiro in rota.Roteiros)
                 {
-                    var consumoMedio = (Math.Truncate(100 * roteiro.ConsumoMedio) / 100).ToString("0.00", new CultureInfo("en-US", false));
+                    var consumoMedio = (Math.Truncate(100 * roteiro.ConsumoMedio) / 100)
+                        .ToString("0.00", new CultureInfo("en-US", false));
                     linhas.Add($"{roteiro.Veiculo.Codigo} {consumoMedio}");
                 }
                 linhas.Add("");
@@ -81,7 +82,7 @@ namespace Damasio34.GCombustivel.Aplicacao.Services
                 foreach (var veiculo in veiculos)
                 {
                     var codigoDoVeiculo = int.Parse(linhas.Dequeue());
-                    var quantidadeDeTrechos = int.Parse(linhas.Dequeue()); // Não foi necessário utulizar
+                    var quantidadeDeTrechos = int.Parse(linhas.Dequeue());
                     var roteiro = new Roteiro(veiculo);
                     var trechos = ObterTrechos(linhas, roteiro);
                     rota.Roteiros.Add(roteiro);
@@ -97,7 +98,6 @@ namespace Damasio34.GCombustivel.Aplicacao.Services
 
         public List<Trecho> ObterTrechos(Queue<string> linhas, Roteiro roteiro)
             => this.ObterTrechos(linhas, roteiro, new List<Trecho>());
-
         private List<Trecho> ObterTrechos(Queue<string> linhas, Roteiro roteiro, List<Trecho> trechos)
         {
             if (linhas.Peek() == "") return trechos;

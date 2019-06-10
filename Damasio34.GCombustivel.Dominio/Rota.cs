@@ -10,7 +10,6 @@ namespace Damasio34.GCombustivel.Dominio
 
         public int Dia { get; }
         public List<Roteiro> Roteiros { get; } = new List<Roteiro>();
-
         public double ConsumoMedio => this.Roteiros.Sum(x => x.ConsumoMedio);
 
         public Roteiro AdicionarVeiculo(Veiculo veiculo)
