@@ -57,11 +57,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Aplicacao\Aplicacao.csproj">
+    <ProjectReference Include="..\Damasio34.GCombustivel.Aplicacao\Aplicacao.csproj">
       <Project>{243DF8CD-CA23-454F-9E35-77CCB26D25E2}</Project>
       <Name>Aplicacao</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GCombustivel.Domain\Dominio.csproj">
+    <ProjectReference Include="..\Damasio34.GCombustivel.Dominio\Dominio.csproj">
       <Project>{b1f7051b-00cd-4403-adc5-3d9bb4e06b03}</Project>
       <Name>Dominio</Name>
     </ProjectReference>
